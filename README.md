@@ -1,5 +1,6 @@
 # Proyecto_Robotica_movil
-El ws usado para el proyecto final con la simulacion en stage de un robot diferencial y con un dqn agent  
+El ws usado para el proyecto final con la simulacion en stage de un robot diferencial y con un dqn agent   
+Para ver los resultados obtenidos por el grupo se encuentran en la carpta dqn_ws en un archivo comprimido con las graficas y los modelos entrenados.
 A continuacion estan los pasos para ejecutar el siguiente ws:  
 primero descargue y descomprimir el archivo.  
 Previamenbte debe haber descargado Stage, una vez instalado corra la siguiente linea:  
