@@ -28,15 +28,15 @@ class QNetwork(nn.Module):
 # DQN Agent
 # ==============================
 class DQNAgent:
-    def __init__(
+    def _init_(
         self,
         state_size: int,
         action_size: int,
         learning_rate: float = 1e-3,
-        gamma: float = 0.99,
+        gamma: float = 0.995,
         epsilon_start: float = 1.0,
         epsilon_min: float = 0.05,
-        epsilon_decay: float = 0.995,
+        epsilon_decay: float = 0.99,
         memory_size: int = 100_000,
         batch_size: int = 64,
         target_update_freq: int = 500
