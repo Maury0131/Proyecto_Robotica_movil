@@ -45,7 +45,7 @@ class DQNTrainingNode(Node):
             learning_rate=0.001,   # Subimos LR para compensar rewards bajos
             epsilon_start=1.0,
             epsilon_min=0.05,
-            epsilon_decay=0.995,   # decay per EPISODE
+            epsilon_decay=0.99,   # decay per EPISODE
             memory_size=30000,
             batch_size=128,
             target_update_freq=500
@@ -177,24 +177,47 @@ class DQNTrainingNode(Node):
     # ==============================
     # Plot metrics
     # ==============================
-    def plot_results(self, filename):
-        plt.figure(figsize=(12, 5))
+# ... (dentro de la clase DQNTrainingNode)
 
+    def plot_results(self, filename):
+        # 1. Gráfica estándar (Reward y Steps)
+        plt.figure(figsize=(12, 5))
         plt.subplot(1, 2, 1)
-        plt.plot(self.episode_rewards)
+        plt.plot(self.episode_rewards, color='blue', alpha=0.3)
         plt.title("Recompensa por Episodio")
         plt.xlabel("Episodio")
         plt.ylabel("Reward")
 
         plt.subplot(1, 2, 2)
-        plt.plot(self.episode_steps)
+        plt.plot(self.episode_steps, color='orange')
         plt.title("Pasos por Episodio")
         plt.xlabel("Episodio")
         plt.ylabel("Steps")
-
+        
         plt.tight_layout()
         plt.savefig(os.path.join(self.results_dir, filename))
         plt.close()
+
+        # 2. NUEVA: Gráfica de Reward Acumulado (Media Móvil)
+        if len(self.episode_rewards) > 10:
+            plt.figure(figsize=(10, 6))
+            
+            # Calcular media móvil de los últimos 20 episodios
+            window = 20
+            avg_rewards = np.convolve(self.episode_rewards, np.ones(window)/window, mode='valid')
+            
+            plt.plot(range(window, len(avg_rewards) + window), avg_rewards, color='red', linewidth=2)
+            plt.fill_between(range(window, len(avg_rewards) + window), avg_rewards, color='red', alpha=0.1)
+            
+            plt.title(f"Recompensa Media Acumulada (Ventana: {window})")
+            plt.xlabel("Episodio")
+            plt.ylabel("Reward Promedio")
+            plt.grid(True, linestyle='--', alpha=0.6)
+            
+            # Guardar con nombre específico
+            acc_filename = filename.replace("progress_", "accumulated_").replace("final_", "final_accumulated_")
+            plt.savefig(os.path.join(self.results_dir, acc_filename))
+            plt.close()
 
 
 def main(args=None):
