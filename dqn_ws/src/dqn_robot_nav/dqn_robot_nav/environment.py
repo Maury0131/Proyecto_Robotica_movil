@@ -38,7 +38,12 @@ class TurtleBot3Env(Node):
         
         # --- CARGA DEL MAPA ---
         # Ajusta la ruta si es necesario
-        path = os.path.expanduser('~/Escritorio/dqn_robot_nav/src/dqn_robot_nav/dqn_robot_nav/cave2.png')
+        current_dir = os.path.dirname(os.path.realpath(__file__))
+        base_dir = current_dir.replace('/lib/python3.12/site-packages', '')
+        base_dir2 = base_dir.replace('/install', '/src')
+        # 2. Une esa ruta con el nombre de tu archivo
+        path = os.path.join(base_dir2, 'cave2.png')
+        
         self.img_original = cv2.imread(path)
         
         if self.img_original is None:
