@@ -38,7 +38,7 @@ class TurtleBot3Env(Node):
         
         # --- CARGA DEL MAPA ---
         # Ajusta la ruta si es necesario
-        path = os.path.expanduser('~/Desktop/dqn_robot_nav/src/dqn_robot_nav/dqn_robot_nav/cave2.png')
+        path = os.path.expanduser('~/Escritorio/dqn_robot_nav/src/dqn_robot_nav/dqn_robot_nav/cave2.png')
         self.img_original = cv2.imread(path)
         
         if self.img_original is None:

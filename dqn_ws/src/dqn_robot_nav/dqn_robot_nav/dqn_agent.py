@@ -28,7 +28,7 @@ class QNetwork(nn.Module):
 # DQN Agent
 # ==============================
 class DQNAgent:
-    def _init_(
+    def __init__(
         self,
         state_size: int,
         action_size: int,
